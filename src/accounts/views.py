@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 
 from django.contrib import messages
 from .forms import UserLoginForm, UserRegisterForm
-
+from django.contrib.auth.decorators import login_required
 
 def login_view(request):
 
@@ -21,8 +21,9 @@ def login_view(request):
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
-        messages.success(request,'Login Successfully.')
         login(request, user)
+        messages.success(request,'Login Successfully.')
+        
         if next:
             return redirect(next)
         return redirect("/")
@@ -54,7 +55,7 @@ def register_view(request):
     }
     return render(request, "form.html", context)
 
-
+@login_required
 def logout_view(request):
     logout(request)
     messages.success(request, 'Logout Successfully..')

@@ -21,10 +21,10 @@ from comments.forms import CommentForm
 from comments.models import Comment
 from .forms import PostForm
 from .models import Post
+from django.contrib.auth.decorators import login_required
 
 
-
-
+@login_required
 def post_create(request):
 	if not request.user.is_authenticated:
 		raise Http404
@@ -131,7 +131,7 @@ def post_list(request):
 
 
 
-
+@login_required
 def post_update(request, slug=None):
 	if not request.user.is_authenticated:
 		raise Http404
@@ -151,7 +151,7 @@ def post_update(request, slug=None):
 	return render(request, "post_form.html", context)
 
 
-
+@login_required
 def post_delete(request, slug=None):
 	if not request.user.is_authenticated:
 		raise Http404
