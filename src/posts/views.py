@@ -21,44 +21,26 @@ from comments.forms import CommentForm
 from comments.models import Comment
 from .forms import PostForm
 from .models import Post
-import requests
-from blog import settings
+
 
 
 
 def post_create(request):
-		if not request.user.is_authenticated:
-			raise Http404
+	if not request.user.is_authenticated:
+		raise Http404
 
-		form = PostForm(request.POST or None, request.FILES or None)
-		
-		if form.is_valid():
-
-				instance = form.save(commit=False)
-				recaptcha_response = request.POST.get("g-recaptcha-response")
-				data = {
-						'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-					'response': recaptcha_response
-				}
-				r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-				result = r.json()
-					# ''' End reCAPTCHA validation '''
-
-				if result['success']:
-					
-						instance.user = request.user
-						instance.save()
-						# message success
-						messages.success(request, "Successfully Created")
-						# return HttpResponseRedirect(instance.get_absolute_url())
-						return redirect("posts:list")
-				else:
-						messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-		
-		context = {
-				"form": form,
-		}
-		return render(request, "post_form.html", context)
+	form = PostForm(request.POST or None, request.FILES or None)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.user = request.user
+		instance.save()
+		# message success
+		messages.success(request, "Successfully Created")
+		return HttpResponseRedirect(instance.get_absolute_url())
+	context = {
+		"form": form,
+	}
+	return render(request, "post_form.html", context)
 
 def post_detail(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
