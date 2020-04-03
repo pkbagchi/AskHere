@@ -1,4 +1,7 @@
 from django import forms
+import json
+import urllib
+from blog import settings
 from django.contrib.auth import (
     authenticate,
     get_user_model,
