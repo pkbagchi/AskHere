@@ -1,6 +1,7 @@
 from django import forms
 import json
 import urllib
+import urllib.request
 from blog import settings
 from django.contrib.auth import (
     authenticate,

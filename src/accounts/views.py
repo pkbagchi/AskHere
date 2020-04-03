@@ -12,6 +12,7 @@ from .forms import UserLoginForm, UserRegisterForm
 from django.contrib.auth.decorators import login_required
 import json
 import urllib
+import urllib.request
 from blog import settings
 
 def login_view(request):
@@ -90,7 +91,7 @@ def register_view(request):
 
                 else:
                     messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-                    
+
     context = {
         "form": form,
         "title": title
