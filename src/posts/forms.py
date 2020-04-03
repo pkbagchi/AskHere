@@ -16,3 +16,4 @@ class PostForm(forms.ModelForm):
             "image",
             
         ]
+        

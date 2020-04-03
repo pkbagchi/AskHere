@@ -22,6 +22,9 @@ from comments.models import Comment
 from .forms import PostForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
+import json
+import urllib
+from blog import settings
 
 
 @login_required
@@ -31,12 +34,31 @@ def post_create(request):
 
 	form = PostForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
-		instance = form.save(commit=False)
-		instance.user = request.user
-		instance.save()
-		# message success
-		messages.success(request, "Successfully Created")
-		return HttpResponseRedirect(instance.get_absolute_url())
+		
+			#   ''' Begin reCAPTCHA validation '''
+			recaptcha_response = request.POST.get('g-recaptcha-response')
+			url = 'https://www.google.com/recaptcha/api/siteverify'
+			values = {
+				'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+				'response': recaptcha_response
+			}
+			data = urllib.parse.urlencode(values).encode()
+			req =  urllib.request.Request(url, data=data)
+			response = urllib.request.urlopen(req)
+			result = json.loads(response.read().decode())
+				# ''' End reCAPTCHA validation '''
+
+			if result['success']:
+				instance = form.save(commit=False)
+				instance.user = request.user
+				instance.save()
+					# message success
+				messages.success(request, "Successfully Created")
+				return HttpResponseRedirect(instance.get_absolute_url())
+
+			else:
+				messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+	
 	context = {
 		"form": form,
 	}

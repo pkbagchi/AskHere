@@ -143,7 +143,7 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_files")
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_files")
 
-GOOGLE_RECAPTCHA_SECRET_KEY = ''
+GOOGLE_RECAPTCHA_SECRET_KEY = '6Lcv7OUUAAAAALYbIZaQPep7-aYeICN0OxUeDe94'
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
