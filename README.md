@@ -12,10 +12,10 @@ AskHere (Q&A) is an extended look at building a modern blog with the Django Fram
  **Step - 2** : To make project run in your local machine run the below commands step by step
               
               cd src
-              python manage.py makemigrations
-              python manage.py migrate
-              python manage.py collectstatic
-              python manage.py runserver
+              python3 manage.py makemigrations
+              python3 manage.py migrate
+              python3 manage.py collectstatic
+              python3 manage.py runserver
               
    Now you can open http://127.0.0.1:8000/ to view the app 
 
