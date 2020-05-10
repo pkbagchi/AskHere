@@ -3,7 +3,7 @@
 AskHere (Q&A) is an extended look at building a modern blog with the Django Framework while leveraging other technologies such as jQuery, Markdown, Bootstrap, HTML and CSS.
 
 
-#### Installation Process : 
+### Installation Process : 
 
 **Step - 1** : Install all the requirements necessary for this project using below command
                   
