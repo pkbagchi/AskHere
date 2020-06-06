@@ -6,7 +6,8 @@ AskHere (Q&A) is an extended look at building a modern blog with the Django Fram
 ### Installation Process : 
 
 **Step - 1** : Install all the requirements necessary for this project using below command
-                  
+              
+              pip3 install django==1.9
               pip3 install -r requirements.txt 
  
  **Step - 2** : To make project run in your local machine run the below commands step by step
