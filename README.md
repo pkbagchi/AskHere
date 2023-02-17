@@ -3,11 +3,10 @@
 AskHere (Q&A) is an extended look at building a modern blog with the Django Framework while leveraging other technologies such as jQuery, Markdown, Bootstrap, HTML and CSS.
 
 
-### Installation Process : 
+### Installation Process
 
 **Step - 1** : Install all the requirements necessary for this project using below command
               
-              pip3 install django==1.9
               pip3 install -r requirements.txt 
  
  **Step - 2** : To make project run in your local machine run the below commands step by step
@@ -18,7 +17,12 @@ AskHere (Q&A) is an extended look at building a modern blog with the Django Fram
               python3 manage.py collectstatic
               python3 manage.py runserver
               
-   Now you can open http://127.0.0.1:8000/ to view the app 
+   Now you can open  127.0.0.1:8000 or localhost:8000 to view the app 
+   
+  ###  Installation with Docker
+              docker-compose up --build
 
+   Now you can open  127.0.0.1:8000 or localhost:8000 to view the app 
+   
 ## Demo link
 A fully functional demo is available at http://askhere.pythonanywhere.com/  or  https://youtu.be/Yqfj0asfvZ8
